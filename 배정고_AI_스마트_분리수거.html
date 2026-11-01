@@ -38,7 +38,6 @@
         }
     </script>
     <style>
-        /* Custom styles & animations */
         .scan-line {
             height: 3px;
             background: linear-gradient(90deg, rgba(34,197,94,0) 0%, rgba(34,197,94,1) 50%, rgba(34,197,94,0) 100%);
@@ -108,7 +107,7 @@
                 <!-- Image Scanner Box -->
                 <div class="relative bg-slate-900 rounded-2xl overflow-hidden shadow-inner flex flex-col items-center justify-center min-h-[260px] border-2 border-dashed border-slate-700" id="dropZone">
                     
-                    <!-- Scanner overlay line (Shown during scan) -->
+                    <!-- Scanner overlay line -->
                     <div id="scanLine" class="hidden absolute left-0 right-0 z-20 scan-line"></div>
 
                     <!-- Placeholder Content -->
@@ -194,7 +193,6 @@
 
                 <!-- Result Display Area -->
                 <div id="resultCard" class="hidden bg-white border border-slate-200 rounded-2xl p-4 shadow-lg space-y-4 animate-fade-in">
-                    <!-- Title & Confidence -->
                     <div class="flex justify-between items-start border-b border-slate-100 pb-3">
                         <div>
                             <div class="flex items-center space-x-2">
@@ -214,17 +212,14 @@
                         </div>
                     </div>
 
-                    <!-- Step-by-Step Instructions -->
                     <div>
                         <h4 class="text-xs font-bold text-slate-700 mb-2.5 flex items-center">
                             <i class="fa-solid fa-list-check text-emerald-600 mr-1.5"></i>배출 전 준비 순서 (필수)
                         </h4>
                         <ol id="resSteps" class="space-y-2 text-xs">
-                            <!-- Injected dynamically -->
                         </ol>
                     </div>
 
-                    <!-- Low Confidence / Warning box -->
                     <div id="resWarning" class="hidden bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-3 text-xs space-y-1">
                         <div class="flex items-center font-bold text-amber-800">
                             <i class="fa-solid fa-triangle-exclamation mr-1.5 text-amber-600"></i> AI 신뢰도가 낮거나 오염이 감지되었습니다.
@@ -232,7 +227,6 @@
                         <p class="text-amber-700 text-[11px]">결과가 정확하지 않을 경우 아래의 직접 검색을 이용하시거나 담당자에게 확인해 주세요.</p>
                     </div>
 
-                    <!-- Action buttons -->
                     <div class="pt-2 flex space-x-2 border-t border-slate-100">
                         <button onclick="openReportModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center space-x-1">
                             <i class="fa-solid fa-bug text-rose-500"></i>
@@ -251,7 +245,6 @@
             <!-- TAB 2: MANUAL SEARCH & CATEGORIES -->
             <section id="tab-search" class="hidden space-y-4">
                 
-                <!-- Search Bar -->
                 <div class="relative">
                     <input type="text" id="searchInput" oninput="filterSearch()" placeholder="배출 품목 검색 (예: 생수병, 컵라면, 과자봉지...)" class="w-full bg-white border border-slate-200 rounded-2xl py-3 pl-10 pr-10 text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
@@ -260,7 +253,6 @@
                     </button>
                 </div>
 
-                <!-- Category Tags -->
                 <div class="flex space-x-1.5 overflow-x-auto pb-1 hide-scrollbar" id="categoryFilter">
                     <button onclick="filterCategory('ALL')" class="cat-btn active bg-emerald-600 text-white text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap shadow-sm">전체</button>
                     <button onclick="filterCategory('PET')" class="cat-btn bg-white border border-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded-full font-medium whitespace-nowrap hover:bg-slate-50">투명페트병</button>
@@ -271,9 +263,7 @@
                     <button onclick="filterCategory('TRASH')" class="cat-btn bg-white border border-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded-full font-medium whitespace-nowrap hover:bg-slate-50">일반쓰레기</button>
                 </div>
 
-                <!-- Items List -->
                 <div id="itemList" class="space-y-3">
-                    <!-- Cards will be populated by JS -->
                 </div>
             </section>
 
@@ -333,7 +323,6 @@
             <!-- TAB 4: ADMIN & STATS DASHBOARD -->
             <section id="tab-admin" class="hidden space-y-4">
                 
-                <!-- Metrics Grid (from Report Pg 7) -->
                 <div class="bg-slate-900 text-white rounded-2xl p-4 shadow-lg space-y-3">
                     <div class="flex justify-between items-center border-b border-slate-800 pb-2">
                         <h3 class="text-xs font-bold text-emerald-400 tracking-wider uppercase">
@@ -362,7 +351,6 @@
                     </div>
                 </div>
 
-                <!-- Recent Feedback & Error Reports List -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
                     <h4 class="text-xs font-bold text-slate-800 flex items-center justify-between">
                         <span><i class="fa-solid fa-[#10B981] fa-list-check text-slate-500 mr-1.5"></i>접수된 피드백 목록</span>
@@ -370,11 +358,9 @@
                     </h4>
 
                     <div id="adminFbList" class="space-y-2 text-xs">
-                        <!-- Injected JS -->
                     </div>
                 </div>
 
-                <!-- System Schedule (Pg 7) -->
                 <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 text-xs text-emerald-900 space-y-2">
                     <p class="font-bold flex items-center">
                         <i class="fa-solid fa-calendar-days text-emerald-600 mr-1.5"></i>추진 일정 현황 (현재 4단계)
@@ -433,7 +419,6 @@
                     <h3 class="font-bold text-slate-900 text-base">스마트 안내 QR 스캔</h3>
                     <p class="text-xs text-slate-500 mt-1">분리수거함 현장에서 앱 설치 없이 즉시 접속하세요.</p>
                 </div>
-                <!-- SVG QR Code Placeholder -->
                 <div class="bg-slate-100 p-4 rounded-2xl inline-block border border-slate-200">
                     <svg class="w-36 h-36 mx-auto" viewBox="0 0 100 100" fill="currentColor">
                         <path d="M0,0 h30 v30 h-30 z M5,5 v20 h20 v-20 z M10,10 h10 v10 h-10 z M70,0 h30 v30 h-30 z M75,5 v20 h20 v-20 z M80,10 h10 v10 h-10 z M0,70 h30 v30 h-30 z M5,75 v20 h20 v-20 z M10,80 h10 v10 h-10 z M40,10 h10 v20 h-10 z M50,40 h20 v10 h-20 z M10,40 h20 v20 h-20 z M70,50 h20 v20 h-20 z M40,70 h20 v20 h-20 z M80,80 h20 v20 h-20 z"/>
@@ -458,7 +443,6 @@
 
     <!-- Application Script -->
     <script>
-        // Data Store (Recycling Database)
         const RECYCLE_DB = [
             {
                 id: 'pet',
@@ -551,20 +535,17 @@
             }
         ];
 
-        // State Management
         let currentTab = 'ai';
         let feedbackList = [
             { id: 1, type: '오답 신고', content: '급식실 매점 비닐 장갑을 종이로 인식함', rating: 3, date: '2026-10-31' },
             { id: 2, type: '시스템 개선', content: 'QR 스캔 후 결과 확인이 빨라서 좋습니다!', rating: 5, date: '2026-10-30' }
         ];
 
-        // DOM Initialization
         document.addEventListener('DOMContentLoaded', () => {
             renderSearchItems(RECYCLE_DB);
             renderAdminFeedback();
         });
 
-        // Tab Switcher
         function switchTab(tabId) {
             currentTab = tabId;
             ['ai', 'search', 'feedback', 'admin'].forEach(tab => {
@@ -582,20 +563,17 @@
             });
         }
 
-        // Location Change Handler
         function changeLocation() {
             const val = document.getElementById('locationSelect').value;
             document.getElementById('qrLocationLabel').innerText = `📍 ${val}`;
             showToast(`위치가 [${val}](으)로 변경되었습니다.`);
         }
 
-        // QR Modal Toggle
         function toggleQRModal() {
             const modal = document.getElementById('qrModal');
             modal.classList.toggle('hidden');
         }
 
-        // Handle Image Upload / Camera
         function handleImageUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -603,7 +581,6 @@
             const reader = new FileReader();
             reader.onload = function(evt) {
                 showScanningState(evt.target.result);
-                // Simulate AI prediction matching sample or random
                 setTimeout(() => {
                     const randomItem = RECYCLE_DB[Math.floor(Math.random() * RECYCLE_DB.length)];
                     displayResult(randomItem);
@@ -612,12 +589,10 @@
             reader.readAsDataURL(file);
         }
 
-        // Sample Quick Selection
         function selectSample(itemId) {
             const item = RECYCLE_DB.find(i => i.id === itemId);
             if (!item) return;
 
-            // Show placeholder preview icon/graphic
             showScanningState(null, item.icon);
 
             setTimeout(() => {
@@ -625,7 +600,6 @@
             }, 1200);
         }
 
-        // Display Scanning animation
         function showScanningState(imgSrc = null, emoji = null) {
             const previewContainer = document.getElementById('previewContainer');
             const previewImage = document.getElementById('previewImage');
@@ -647,7 +621,6 @@
             }
         }
 
-        // Display AI Detection Result Card
         function displayResult(item) {
             document.getElementById('scanLine').classList.add('hidden');
             document.getElementById('scanStatus').classList.add('hidden');
@@ -660,7 +633,6 @@
             const resSteps = document.getElementById('resSteps');
             const resWarning = document.getElementById('resWarning');
 
-            // Set Title & Status
             resTitle.innerText = `${item.icon} ${item.name}`;
             resConfidence.innerText = `신뢰도 ${item.confidence}%`;
             resTargetBox.innerText = item.targetBox;
@@ -673,7 +645,6 @@
                 resBadge.innerText = "재활용 불가";
             }
 
-            // Steps
             resSteps.innerHTML = item.steps.map((st, idx) => `
                 <li class="flex items-start space-x-2 bg-slate-50 p-2 rounded-xl border border-slate-100">
                     <span class="bg-emerald-600 text-white font-bold w-4 h-4 rounded-full flex items-center justify-center text-[10px] flex-shrink-0 mt-0.5">${idx+1}</span>
@@ -681,7 +652,6 @@
                 </li>
             `).join('');
 
-            // Warning
             if (item.isComplex || item.confidence < 85) {
                 resWarning.classList.remove('hidden');
             } else {
@@ -691,7 +661,6 @@
             resultCard.classList.remove('hidden');
         }
 
-        // Reset Scanner UI
         function resetScanner() {
             document.getElementById('previewContainer').classList.add('hidden');
             document.getElementById('uploadPlaceholder').classList.remove('hidden');
@@ -701,7 +670,6 @@
             document.getElementById('imageInput').value = '';
         }
 
-        // Render Search Tab Items
         function renderSearchItems(items) {
             const list = document.getElementById('itemList');
             if (items.length === 0) {
@@ -733,7 +701,6 @@
             `).join('');
         }
 
-        // Search Input Filter
         function filterSearch() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             const clearBtn = document.getElementById('clearBtn');
@@ -756,7 +723,6 @@
             renderSearchItems(RECYCLE_DB);
         }
 
-        // Category Tag Filter
         function filterCategory(cat) {
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn bg-white border border-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded-full font-medium whitespace-nowrap hover:bg-slate-50";
@@ -771,7 +737,6 @@
             }
         }
 
-        // Feedback Form Submission
         function submitFeedback(e) {
             e.preventDefault();
             const type = document.getElementById('fbType').value;
@@ -793,7 +758,6 @@
             showToast("소중한 의견이 등록되었습니다. 감사합니다!");
         }
 
-        // Open Report Modal from AI result
         function openReportModal() {
             switchTab('feedback');
             document.getElementById('fbType').value = "오답 신고";
@@ -801,7 +765,6 @@
             document.getElementById('fbContent').value = `[AI 오답 신고] '${currentTitle}' 판별 결과가 다릅니다. 실제 올바른 품목: `;
         }
 
-        // Admin Dashboard Feedback Renderer
         function renderAdminFeedback() {
             const listContainer = document.getElementById('adminFbList');
             document.getElementById('adminFbCount').innerText = `${feedbackList.length} 건`;
@@ -818,7 +781,6 @@
             `).join('');
         }
 
-        // Toast Helper
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
